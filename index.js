@@ -19,3 +19,18 @@ const pool = new Pool({
     port: 5432
 });
 
+//Get all
+app.get('/', (req, res) => {
+    console.log("TEST DATA :");
+
+    pool.query('SELECT * FROM biodata ORDER BY id')
+    .then(result => {
+        res.send(result.rows);
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(500).send('Intrernal Server Error');
+    });
+});
+
+
